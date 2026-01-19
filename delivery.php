@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доставка и Оплата | РАССВЕТ-С</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+    <header class="header"><?php include 'header.php'; ?></header>
+    <section class="hero" style="padding: 60px 0;">
+        <div class="container">
+            <h1 class="hero-title-large">Доставка и Оплата</h1>
+        </div>
+    </section>
+    <div class="container" style="padding-bottom: 80px;">
+        <div class="contacts-wrapper delivery-grid" style="margin-bottom: 60px;">
+            <div class="contact-card text-block content-padding">
+                <h2 class="section-header">Финансовые условия</h2>
+                <p>
+                    Компания <strong>ООО «РАССВЕТ-С»</strong> ведет свою деятельность строго в соответствии с законодательством Российской Федерации. Мы работаем исключительно с юридическими лицами и индивидуальными предпринимателями по безналичному расчету.
+                </p>
+                <p>
+                    Все цены в коммерческих предложениях и счетах указываются в рублях РФ и <strong>включают НДС 20%</strong>. Мы гарантируем полную прозрачность сделки и отсутствие скрытых комиссий.
+                </p>
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #fff; font-size: 16px; margin-bottom: 15px; text-transform: uppercase; font-weight: 800;">Порядок работы:</h3>
+                    <ul class="legal-list">
+                        <li>Заключение Договора поставки (разового или долгосрочного).</li>
+                        <li>Выставление Счета на оплату (Счет-оферта).</li>
+                        <li>Предоставление УПД (Универсальный Передаточный Документ).</li>
+                        <li>Обмен документами через ЭДО (СБИС, Диадок) или Почтой России.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contact-card card-padding">
+                <h3 style="color: #fff; font-size: 18px; font-weight: 800; margin-top: 0; margin-bottom: 20px; text-transform: uppercase; text-align: center;">Карточка предприятия</h3>
+                <div class="requisites-wrapper">
+                    <table class="req-table">
+                        <tr><td class="req-label">Название</td><td class="req-value">ООО «РАССВЕТ-С»</td></tr>
+                        <tr><td class="req-label">ИНН</td><td class="req-value">7805626388</td></tr>
+                        <tr><td class="req-label">КПП</td><td class="req-value">780501001</td></tr>
+                        <tr><td class="req-label">ОГРН</td><td class="req-value">1137847277873</td></tr>
+                        <tr><td class="req-label">Юр. Адрес</td><td class="req-value">198095, г. СПб,<br>ул. Промышленная, д. 42</td></tr>
+                    </table>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" class="btn-download">Скачать реквизиты (PDF)</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-card text-block content-padding">
+            <h2 class="section-header">Федеральная логистика</h2>
+            <div>
+                <p>
+                    Сердце нашей логистической системы — современный распределительный центр в Санкт-Петербурге. Выбор этой локации не случаен: это ключевой транспортный хаб Северо-Запада, интегрированный в федеральные магистрали.
+                </p>
+                <p>
+                    В лесозаготовительном бизнесе понятие «время» имеет прямую денежную стоимость. При поступлении оплаты до <strong>14:00 по московскому времени</strong>, ваш заказ комплектуется и передается в терминал транспортной компании в этот же день.
+                </p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div class="info-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"></path><line x1="23" y1="13" x2="23" y2="21"></line><polyline points="20 16 23 13 26 16"></polyline></svg>
+                    <div><strong style="color: #fff; font-size: 15px;">Бесплатная доставка</strong><div style="font-size: 13px; color: #aaa; margin-top: 4px;">До терминала транспортной компании в СПб мы довозим груз за свой счет.</div></div>
+                </div>
+                <div class="info-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <div><strong style="color: #fff; font-size: 15px;">Надежная упаковка</strong><div style="font-size: 13px; color: #aaa; margin-top: 4px;">Хрупкие детали отправляются в жесткой обрешетке со страховкой.</div></div>
+                </div>
+            </div>
+            <h3 style="color: #fff; font-size: 18px; margin-top: 50px; text-align: center; text-transform: uppercase; font-weight: 800; color: #666;">Наши партнеры по логистике</h3>
+            <div class="tk-grid">
+                <div class="tk-card"><img src="https://logo-teka.com/wp-content/uploads/2025/07/delovie-linii-sign-logo.png" alt="Деловые Линии"></div>
+                <div class="tk-card"><img src="https://logo-teka.com/wp-content/uploads/2025/06/cdek-logo.svg" alt="СДЭК"></div>
+                <div class="tk-card"><img src="https://www.tadviser.ru/images/5/5c/ПЭК_Транспортная_компания_ЛОГО.png" alt="ПЭК"></div>
+                <div class="tk-card"><img src="https://www.ekspress-l.ru/assets/svg/logo.svg" alt="Экспресс-Л"></div>
+            </div>
+        </div>
+    </div>
+<?php include 'footer.php'; ?>
+</body>
+</html>

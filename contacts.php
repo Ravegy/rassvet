@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | РАССВЕТ-С</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body>
+
+    <?php include 'header.php'; ?>
+
+    <div id="toast-container"></div>
+
+    <div class="container" style="padding-top: 60px; padding-bottom: 80px; flex: 1;">
+        <h1 class="contact-page-title">Свяжитесь с нами</h1>
+
+        <div class="contacts-wrapper" style="grid-template-columns: 1fr;"> 
+            <div class="contact-card contact-page-grid">
+                
+                <div class="contact-left-col">
+                    <div class="info-list">
+                        <h2 style="margin-top:0; margin-bottom: 30px; font-size: 22px;">Контактная информация</h2>
+                        
+                        <div class="info-item">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                            <div class="info-content"><h3>Телефон</h3><a href="tel:+79818881337">+7 (981) 888-13-37</a></div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                            <div class="info-content"><h3>Email</h3><a href="mailto:info@rassvet-s.ru">info@rassvet-s.ru</a></div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                            <div class="info-content"><h3>Адрес склада</h3><p>г. Санкт-Петербург,<br>ул. Промышленная, д. 42</p></div>
+                        </div>
+
+                        <div style="margin-top: 0;">
+                            <h3 style="color: #fff; margin-bottom: 10px; font-size: 18px;">Реквизиты</h3>
+                            <p style="font-size: 13px; line-height: 1.6; color: #ccc; margin: 0;">
+                                <strong>ООО «РАССВЕТ-С»</strong><br>
+                                ИНН: 7805626388 / КПП: 780501001<br>
+                                ОГРН: 1137847277873<br>
+                                Юр. адрес: 198095, г. СПб, ул. Промышленная, д. 42, лит. А, пом. 9-Н, оф. 407
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-right-col">
+                    <h2 style="margin-top:0; margin-bottom: 20px; font-size: 22px;">Напишите нам</h2>
+                    <form id="contactPageForm" class="order-form" enctype="multipart/form-data" style="margin-top: 0;">
+                        
+                        <div class="form-group">
+                            <input type="text" id="contactName" name="name" class="form-input" placeholder="Ваше Имя" required>
+                            <div class="error-message">Минимум 2 буквы</div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="Номер телефона" required>
+                            <div class="error-message">Введите полный номер</div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" class="form-input" placeholder="Ваш Email (для ответа)">
+                            <div class="error-message">Некорректный Email</div>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="contactMessage" name="message" class="form-input" placeholder="Ваше сообщение..." rows="6" style="resize: none;" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" id="contactFile" name="file" class="form-input">
+                        </div>
+
+                        <button type="submit" class="btn-cart-order">Отправить сообщение</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=30.264178%2C59.894451&z=16&pt=30.264178,59.894451,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+
+    <?php include 'footer.php'; ?>
+    <script src="https://unpkg.com/imask"></script>
+    </body>
+</html>
