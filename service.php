@@ -117,103 +117,82 @@
             </div>
         </div>
 
-        <div class="contact-card content-padding" style="margin-top: 60px;">
-            <h2 class="section-header">Прайс-лист на услуги</h2>
-            <p style="margin-bottom: 30px;">Ниже приведены базовые расценки на типовые работы. Окончательная стоимость формируется после проведения дефектовки и зависит от степени износа узла, стоимости запчастей и накладных расходов (командировочные, логистика).</p>
+        <div class="price-section" style="margin-top: 60px;">
+            <h2 class="section-header" style="border: none; padding: 0; margin-bottom: 10px;">Прайс-лист на услуги</h2>
+            <p style="margin-bottom: 40px; color: #888; max-width: 800px;">
+                Базовые расценки. Окончательная стоимость формируется после дефектовки.
+            </p>
             
             <div class="price-table-wrapper">
                 <table class="price-table">
                     <thead>
                         <tr>
-                            <th>Наименование работ</th>
-                            <th>Ед. изм.</th>
-                            <th>Стоимость работ</th>
+                            <th style="width: 50%;">Наименование работ</th>
+                            <th style="width: 20%;">Ед. изм.</th>
+                            <th style="width: 30%;">Стоимость</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Компьютерная диагностика и сброс ошибок (с выездом)</td>
-                            <td>выезд</td>
-                            <td class="price-val">от 15 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Нормо-час работы сервисного инженера</td>
-                            <td>час</td>
-                            <td class="price-val">3 500 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Дефектовка гидронасоса (разборка/сборка, акт)</td>
-                            <td>шт.</td>
-                            <td class="price-val">5 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Капитальный ремонт гидронасоса (работа)</td>
-                            <td>шт.</td>
-                            <td class="price-val">от 25 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Капитальный ремонт ДВС (снятый двигатель)</td>
-                            <td>шт.</td>
-                            <td class="price-val">от 120 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Ремонт харвестерной головки (полная переборка)</td>
-                            <td>шт.</td>
-                            <td class="price-val">от 80 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Восстановление отверстий (наплавка + расточка)</td>
-                            <td>ось</td>
-                            <td class="price-val">от 12 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Ремонт электронного блока управления (ЭБУ)</td>
-                            <td>шт.</td>
-                            <td class="price-val">от 8 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Техническое обслуживание ТО-1000 (работа)</td>
-                            <td>компл.</td>
-                            <td class="price-val">30 000 ₽</td>
-                        </tr>
-                        <tr>
-                            <td>Выезд бригады (километраж)</td>
-                            <td>км</td>
-                            <td class="price-val">60 ₽ / км</td>
-                        </tr>
+                        <tr><td>Компьютерная диагностика (с выездом)</td><td>выезд</td><td class="price-val">от 15 000 ₽</td></tr>
+                        <tr><td>Нормо-час сервисного инженера</td><td>час</td><td class="price-val">3 500 ₽</td></tr>
+                        <tr><td>Дефектовка гидронасоса (разборка/сборка)</td><td>шт.</td><td class="price-val">5 000 ₽</td></tr>
+                        <tr><td>Капитальный ремонт гидронасоса (работа)</td><td>шт.</td><td class="price-val">от 25 000 ₽</td></tr>
+                        <tr><td>Капитальный ремонт ДВС (снятый)</td><td>шт.</td><td class="price-val">от 120 000 ₽</td></tr>
+                        <tr><td>Ремонт харвестерной головки (переборка)</td><td>шт.</td><td class="price-val">от 80 000 ₽</td></tr>
+                        <tr><td>Восстановление отверстий (наплавка)</td><td>ось</td><td class="price-val">от 12 000 ₽</td></tr>
+                        <tr><td>Ремонт ЭБУ (электронного блока)</td><td>шт.</td><td class="price-val">от 8 000 ₽</td></tr>
+                        <tr><td>Техническое обслуживание ТО-1000</td><td>компл.</td><td class="price-val">30 000 ₽</td></tr>
+                        <tr><td>Выезд бригады (километраж)</td><td>км</td><td class="price-val">60 ₽ / км</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p style="font-size: 12px; color: #666; margin-top: 15px;">* Цены не являются публичной офертой. НДС 20% включен в стоимость.</p>
+            <div style="margin-top: 25px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: #555;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                Цены указаны с учетом НДС 20%. Не является публичной офертой.
+            </div>
         </div>
 
-        <div class="steps-wrapper" style="margin-top: 80px; margin-bottom: 80px;">
-            <h2 class="section-header" style="text-align: center; border: none; padding: 0; margin-bottom: 50px;">Алгоритм работы</h2>
+        <div class="steps-wrapper" style="margin-top: 100px; margin-bottom: 100px;">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <h2 class="section-header" style="text-align: center; border: none; padding: 0; margin-bottom: 20px;">Алгоритм работы</h2>
+                <p style="color: #888;">Прозрачный процесс от вашего звонка до запуска техники в лесу.</p>
+            </div>
+
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-num">01</div>
-                    <h3>Обращение</h3>
-                    <p>Вы связываетесь с нами, описываете симптомы неисправности, присылаете фото шильдиков и коды ошибок.</p>
+                    <div class="step-content">
+                        <h3>Обращение</h3>
+                        <p>Вы связываетесь с нами, описываете симптомы неисправности, присылаете фото шильдиков и коды ошибок.</p>
+                    </div>
                 </div>
                 <div class="step-card">
                     <div class="step-num">02</div>
-                    <h3>Диагностика</h3>
-                    <p>Мы проводим удаленную консультацию или выезжаем на объект для точной дефектовки неисправного узла.</p>
+                    <div class="step-content">
+                        <h3>Диагностика</h3>
+                        <p>Мы проводим удаленную консультацию или выезжаем на объект для точной дефектовки узла инструментом.</p>
+                    </div>
                 </div>
                 <div class="step-card">
                     <div class="step-num">03</div>
-                    <h3>Смета</h3>
-                    <p>Составляем подробную смету с ценами на работы и запчасти. Согласовываем сроки. Подписываем договор.</p>
+                    <div class="step-content">
+                        <h3>Смета и Договор</h3>
+                        <p>Составляем прозрачную смету (работы + запчасти). Согласовываем сроки. Подписываем договор поставки услуг.</p>
+                    </div>
                 </div>
                 <div class="step-card">
                     <div class="step-num">04</div>
-                    <h3>Ремонт</h3>
-                    <p>Выполняем работы на месте или в нашем цеху. Используем спец. инструмент и соблюдаем моменты затяжки.</p>
+                    <div class="step-content">
+                        <h3>Ремонт</h3>
+                        <p>Выполняем работы. Используем спец. инструмент, динамометрические ключи и заводские моменты затяжки.</p>
+                    </div>
                 </div>
                 <div class="step-card">
                     <div class="step-num">05</div>
-                    <h3>Испытания</h3>
-                    <p>Проводим нагрузочное тестирование, калибровку системы, сдаем работу заказчику с подписанием акта.</p>
+                    <div class="step-content">
+                        <h3>Испытания</h3>
+                        <p>Проводим нагрузочное тестирование, калибровку системы. Сдаем работу с подписанием акта и гарантией.</p>
+                    </div>
                 </div>
             </div>
         </div>
