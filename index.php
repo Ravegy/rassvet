@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Запчасти Komatsu Forest | РАССВЕТ-С</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>">
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body>
@@ -149,6 +149,43 @@
 
                     </svg>
                 </div>
+            </div>
+        </div>
+
+        <div class="contact-card content-padding reveal-block" style="margin-top: 60px;">
+            <h2 class="section-header" style="text-align: center; border: none; padding: 0; margin-bottom: 40px;">Наши партнеры</h2>
+            
+            <div class="partners-wrap">
+                <button class="p-btn p-prev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                
+                <div class="partners-track" id="partnersTrack">
+                    <div class="partner-item">
+                        <img src="img/komatsu_logo.png" class="partner-logo" alt="Komatsu">
+                        <div class="partner-float-name">KOMATSU</div>
+                    </div>
+                    <div class="partner-item">
+                        <img src="img/valmet_logo.png" class="partner-logo" alt="Valmet">
+                        <div class="partner-float-name">VALMET</div>
+                    </div>
+                    <div class="partner-item">
+                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Rexroth</span>
+                        <div class="partner-float-name">REXROTH</div>
+                    </div>
+                    <div class="partner-item">
+                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Parker</span>
+                        <div class="partner-float-name">PARKER</div>
+                    </div>
+                    <div class="partner-item">
+                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Danfoss</span>
+                        <div class="partner-float-name">DANFOSS</div>
+                    </div>
+                    <div class="partner-item">
+                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">PONSSE</span>
+                        <div class="partner-float-name">PONSSE</div>
+                    </div>
+                </div>
+
+                <button class="p-btn p-next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
             </div>
         </div>
 
