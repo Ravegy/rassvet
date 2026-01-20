@@ -1,181 +1,163 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    if (window.appInitialized) return;
-    window.appInitialized = true;
-
-    // --- АНИМАЦИЯ ПРИ СКРОЛЛЕ (SCROLL REVEAL) ---
-    const animatedElements = document.querySelectorAll('.contact-card, .section-header, .srv-card, .step-card, .hero-title-large, .feature-item, .price-table-wrapper');
-    
-    const observerOptions = {
-        threshold: 0.1, // Срабатывает, когда 10% элемента видно
-        rootMargin: '0px 0px -50px 0px' // Чуть раньше, чем низ экрана
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Анимация только один раз
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    animatedElements.forEach(el => {
-        el.classList.add('reveal-block'); // Добавляем класс скрытия
-        observer.observe(el); // Начинаем следить
+    document.querySelectorAll('.reveal-block').forEach(block => {
+        observer.observe(block);
     });
 
-    // --- МЕНЮ И ШАПКА ---
-    try {
-        const menuBtn = document.getElementById('menuBtn');
-        const headerNav = document.getElementById('headerNav');
-        const header = document.querySelector('.header');
-
-        if (menuBtn && headerNav) {
-            menuBtn.addEventListener('click', () => {
-                headerNav.classList.toggle('active');
-                menuBtn.style.transform = headerNav.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
-            });
-            headerNav.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    headerNav.classList.remove('active');
-                    menuBtn.style.transform = 'rotate(0deg)';
-                });
-            });
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(0, 0, 0, 0.98)';
-                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.95)';
-                header.style.boxShadow = '0 1px 10px rgba(46, 204, 113, 0.3)';
-            }
+    const phoneInput = document.getElementById('servicePhone');
+    if (phoneInput && window.IMask) {
+        IMask(phoneInput, {
+            mask: '+{7} (000) 000-00-00'
         });
-    } catch (e) {}
+    }
 
-    // --- ФОРМЫ ---
-    function setupForm(formId, phoneId) {
-        const form = document.getElementById(formId);
-        if (!form) return;
+    const track = document.getElementById('partnersTrack');
+    if (track) {
+        const items = track.querySelectorAll('.partner-item');
+        const btnPrev = document.querySelector('.p-prev');
+        const btnNext = document.querySelector('.p-next');
+        let currentIndex = 0;
+        let autoPlayInterval;
 
-        const phoneInput = document.getElementById(phoneId);
-        let phoneMask = null;
-        let isSubmitting = false;
+        const getItemsPerView = () => {
+            const width = window.innerWidth;
+            if (width <= 500) return 1;
+            if (width <= 800) return 2;
+            if (width <= 1200) return 3;
+            return 4;
+        };
 
-        if (phoneInput && typeof IMask !== 'undefined') {
-            phoneMask = IMask(phoneInput, { mask: '+{7} (000) 000-00-00' });
-        }
+        const updateSlider = () => {
+            const itemsPerView = getItemsPerView();
+            const totalItems = items.length;
 
-        function validateInput(input) {
-            const type = input.name;
-            const parent = input.closest('.form-group');
-            let valid = false;
+            if (currentIndex > totalItems - itemsPerView) {
+                currentIndex = 0;
+            }
+            if (currentIndex < 0) {
+                currentIndex = totalItems - itemsPerView;
+            }
 
-            if (type === 'name') {
-                valid = input.value.trim().length >= 2;
-            } else if (type === 'phone') {
-                valid = phoneMask && phoneMask.unmaskedValue.length === 11;
-            } else if (type === 'email') {
-                if (input.value.trim() === '') {
-                    valid = true;
-                    parent.classList.remove('valid', 'invalid');
-                    return true;
+            const itemWidth = track.scrollWidth / totalItems;
+            const moveAmount = currentIndex * itemWidth;
+            
+            track.style.transform = `translateX(-${moveAmount}px)`;
+
+            items.forEach(item => item.classList.remove('active-slide'));
+            
+            for (let i = 0; i < itemsPerView; i++) {
+                const targetIndex = currentIndex + i;
+                if (items[targetIndex]) {
+                    setTimeout(() => {
+                        items[targetIndex].classList.add('active-slide');
+                    }, i * 150);
                 }
-                const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                valid = re.test(input.value);
-            } else if (type === 'message') {
-                valid = input.value.trim().length >= 5;
-            } else {
-                valid = true;
             }
+        };
 
-            if (valid) {
-                parent.classList.add('valid');
-                parent.classList.remove('invalid');
-            } else {
-                parent.classList.add('invalid');
-                parent.classList.remove('valid');
-            }
-            return valid;
-        }
+        const nextSlide = () => {
+            currentIndex++;
+            updateSlider();
+            resetTimer();
+        };
 
-        form.querySelectorAll('input, textarea').forEach(el => {
-            el.addEventListener('input', () => validateInput(el));
-            el.addEventListener('blur', () => validateInput(el));
+        const prevSlide = () => {
+            currentIndex--;
+            updateSlider();
+            resetTimer();
+        };
+
+        if (btnNext) btnNext.addEventListener('click', nextSlide);
+        if (btnPrev) btnPrev.addEventListener('click', prevSlide);
+
+        const startTimer = () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        };
+
+        const resetTimer = () => {
+            clearInterval(autoPlayInterval);
+            startTimer();
+        };
+
+        updateSlider();
+        startTimer();
+
+        window.addEventListener('resize', () => {
+            updateSlider();
         });
+    }
 
-        form.addEventListener('submit', async function(e) {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (isSubmitting) return;
-
-            let hasError = false;
-            form.querySelectorAll('input[required], textarea[required]').forEach(el => {
-                if (!validateInput(el)) hasError = true;
-            });
-
-            if (hasError) {
-                showToast('Заполните обязательные поля', 'error');
-                form.animate([
-                    { transform: 'translateX(0)' }, { transform: 'translateX(-10px)' }, 
-                    { transform: 'translateX(10px)' }, { transform: 'translateX(0)' }
-                ], { duration: 300 });
-                return;
-            }
-
-            isSubmitting = true;
+            
             const btn = form.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            btn.innerText = 'ОТПРАВЛЯЮ...';
-            btn.style.opacity = '0.7';
+            const originalText = btn.textContent;
+            
             btn.disabled = true;
+            btn.textContent = 'Отправка...';
 
             const formData = new FormData(form);
-            if(phoneMask) formData.set('phone', phoneMask.value);
-
+            
             try {
-                const response = await fetch('send.php', { method: 'POST', body: formData });
+                const response = await fetch('send.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
                 const result = await response.json();
-
+                
                 if (result.status === 'success') {
-                    showToast('Ваша заявка принята!');
+                    showToast('Заявка успешно отправлена!', 'success');
                     form.reset();
-                    if(phoneMask) phoneMask.updateValue();
-                    form.querySelectorAll('.form-group').forEach(div => div.classList.remove('valid', 'invalid'));
                 } else {
-                    showToast('Ошибка: ' + result.message, 'error');
+                    showToast('Ошибка отправки. Попробуйте позже.', 'error');
                 }
             } catch (error) {
-                console.error(error);
-                showToast('Ошибка сети', 'error');
+                console.error('Error:', error);
+                showToast('Ошибка соединения с сервером', 'error');
             } finally {
-                isSubmitting = false;
-                btn.innerText = originalText;
-                btn.style.opacity = '1';
                 btn.disabled = false;
+                btn.textContent = originalText;
             }
         });
-    }
-
-    setupForm('contactPageForm', 'contactPhone');
-    setupForm('serviceForm', 'servicePhone');
-
-    function showToast(text, type = 'success') {
-        const container = document.getElementById('toast-container');
-        if (!container) return;
-        
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        toast.innerHTML = type === 'success' 
-            ? `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>${text}</span>`
-            : `<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>${text}</span>`;
-        
-        container.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 10);
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 4000);
-    }
+    });
 });
+
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icon = type === 'success' 
+        ? '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+        : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+
+    toast.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px;">
+            ${icon}
+            <span>${message}</span>
+        </div>
+    `;
+    
+    container.appendChild(toast);
+    
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+    }, 4000);
+}
