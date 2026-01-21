@@ -189,19 +189,7 @@ html, body { font-family: 'Manrope', sans-serif; margin: 0; padding: 0; padding-
 .step-card h3::before { content: ''; display: block; width: 25px; height: 3px; background: var(--brand-green); margin-bottom: 12px; border-radius: 2px; transition: 0.3s; }
 .step-card:hover h3::before { width: 40px; }
 .step-card p { color: #aaa; font-size: 13px; line-height: 1.5; margin: 0; }
-.cats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; margin-top: 40px; width: 100%; }
-.cat-card { position: relative; height: 340px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 45px; text-decoration: none; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); box-sizing: border-box; }
-.cat-card:hover { transform: translateY(-7px); background: rgba(255, 255, 255, 0.08); border-color: var(--brand-green); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-.cat-bg { width: 100%; height: 180px; margin-bottom: 20px; background-repeat: no-repeat; background-position: center; background-size: contain; transition: 0.4s; filter: invert(1) opacity(0.9); mix-blend-mode: lighten; flex-shrink: 0; }
-.cat-card:hover .cat-bg { transform: scale(1.1); filter: invert(1) opacity(1) drop-shadow(0 0 8px rgba(255,255,255,0.6)); }
-.cat-overlay { padding: 0 15px; text-align: center; width: 100%; box-sizing: border-box; }
-.cat-title { height: 34px; font-size: 11px; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0; line-height: 1.4; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.cat-arrow { font-size: 10px; font-weight: 700; color: var(--brand-green); text-transform: uppercase; margin-top: 15px; letter-spacing: 1px; opacity: 0; transform: translateY(10px); transition: 0.3s; display: block; }
-.cat-card:hover .cat-arrow { opacity: 1; transform: translateY(0); }
-@media(max-width: 1600px) { .cats-grid { grid-template-columns: repeat(4, 1fr); } }
-@media(max-width: 1200px) { .cats-grid { grid-template-columns: repeat(3, 1fr); } .partner-item { flex: 0 0 calc(33.333% - 14px); } }
-@media(max-width: 900px) { .cats-grid { grid-template-columns: repeat(2, 1fr); } .cat-card { height: 260px; padding-top: 35px; } .cat-bg { height: 120px; } }
-@media(max-width: 600px) { .cats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .cat-card { height: 200px; padding-top: 20px; } .cat-bg { height: 90px; margin-bottom: 15px; } .cat-title { font-size: 10px; height: 30px; } }
+@media(max-width: 1200px) { .partner-item { flex: 0 0 calc(33.333% - 14px); } }
 @media(max-width: 800px) { .partner-item { flex: 0 0 calc(50% - 10px); } .partners-wrap { padding: 0 50px; } }
 @media(max-width: 500px) { .partners-wrap { padding: 0; } .p-btn { display: none; } .partner-item { flex: 0 0 calc(100%); } }
 .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; justify-content: center; max-width: 1200px; margin: 0 auto; }
