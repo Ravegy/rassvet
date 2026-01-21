@@ -160,27 +160,27 @@
                 
                 <div class="partners-track" id="partnersTrack">
                     <div class="partner-item">
-                        <img src="img/komatsu_logo.png" class="partner-logo" alt="Komatsu">
+                        <span style="font-weight: 900; font-size: 40px; color: var(--brand-green); text-transform: uppercase;" class="partner-logo">KOMATSU</span>
                         <div class="partner-float-name">KOMATSU</div>
                     </div>
                     <div class="partner-item">
-                        <img src="img/valmet_logo.png" class="partner-logo" alt="Valmet">
+                        <span style="font-weight: 900; font-size: 40px; color: var(--brand-green); text-transform: uppercase;" class="partner-logo">VALMET</span>
                         <div class="partner-float-name">VALMET</div>
                     </div>
                     <div class="partner-item">
-                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Rexroth</span>
+                        <span style="font-weight: 900; font-size: 40px; color: #e3000f; text-transform: uppercase;" class="partner-logo">REXROTH</span>
                         <div class="partner-float-name">REXROTH</div>
                     </div>
                     <div class="partner-item">
-                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Parker</span>
+                        <span style="font-weight: 900; font-size: 40px; color: #ffb81c; text-transform: uppercase;" class="partner-logo">PARKER</span>
                         <div class="partner-float-name">PARKER</div>
                     </div>
                     <div class="partner-item">
-                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">Danfoss</span>
+                        <span style="font-weight: 900; font-size: 40px; color: #d60000; text-transform: uppercase;" class="partner-logo">DANFOSS</span>
                         <div class="partner-float-name">DANFOSS</div>
                     </div>
                     <div class="partner-item">
-                        <span style="font-weight: 900; font-size: 24px; color: #ccc;" class="partner-logo">PONSSE</span>
+                        <span style="font-weight: 900; font-size: 40px; color: #fbb900; text-transform: uppercase;" class="partner-logo">PONSSE</span>
                         <div class="partner-float-name">PONSSE</div>
                     </div>
                 </div>
