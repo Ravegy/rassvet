@@ -1,36 +1,39 @@
 <?php
-$cur = basename($_SERVER['PHP_SELF'], ".php"); 
-$active = function($p) use ($cur) {
-    if ($p === '/' && ($cur === 'index' || $cur === '')) return 'active';
-    return ($cur === $p) ? 'active' : '';
-};
+// Если переменная пути не задана, считаем, что мы в корне
+if (!isset($path)) { $path = ''; }
 ?>
-
 <header class="header">
-    <div class="container header-main">
-        <button class="menu-btn" id="menuBtn">
-            <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </button>
-        
-        <a href="/" class="logo-text"><h1>РАССВЕТ-С</h1></a>
-        
-        <nav class="header-nav" id="headerNav">
-            <a href="/" class="nav-link <?php echo $active('/'); ?>">Главная</a>
-            <a href="catalog.php" class="nav-link <?php echo $active('catalog'); ?>">Каталог Komatsu</a>
-            <a href="about.php" class="nav-link <?php echo $active('about'); ?>">О компании</a>
-            <a href="delivery.php" class="nav-link <?php echo $active('delivery'); ?>">Доставка и оплата</a>
-            <a href="contacts.php" class="nav-link <?php echo $active('contacts'); ?>">Контакты</a>
-        </nav>
-    
-        <div class="header-contacts">
-            <div class="header-icon-btn" id="favBtn">
-                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <span class="icon-count" id="favCount">0</span>
-            </div>
-            <div class="header-icon-btn" id="cartBtn">
-                <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                <span class="icon-count" id="cartCount">0</span>
+    <div class="container">
+        <div class="header-main">
+            <button class="menu-btn" onclick="toggleMenu()">
+                <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+            
+            <a href="<?php echo $path; ?>index.php" class="logo-text">
+                <h1>РАССВЕТ-С</h1>
+            </a>
+
+            <nav class="header-nav" id="headerNav">
+                <a href="<?php echo $path; ?>index.php" class="nav-link">Главная</a>
+                <a href="<?php echo $path; ?>catalog.php" class="nav-link">Каталог Komatsu</a>
+                <a href="<?php echo $path; ?>delivery.php" class="nav-link">Оплата и доставка</a>
+                <a href="<?php echo $path; ?>contacts.php" class="nav-link">Контакты</a>
+            </nav>
+
+            <div class="header-contacts">
+                <a href="https://wa.me/79000000000" class="header-icon-btn">
+                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                </a>
+                <div class="header-icon-btn cart-btn">
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="icon-count">0</span>
+                </div>
             </div>
         </div>
     </div>
 </header>
+<script>
+    function toggleMenu() {
+        document.getElementById('headerNav').classList.toggle('active');
+    }
+</script>
