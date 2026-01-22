@@ -21,10 +21,11 @@
                 <p class="home-subtitle">
                     Федеральный дистрибьютор запчастей. Собственный сервисный центр. Отгрузка день в день.
                 </p>
-                <div class="hero-buttons">
-                    <a href="catalog.php" class="btn-outline">Каталог запчастей</a>
-                    <a href="service.php" class="btn-outline">Записаться на сервис</a>
-                </div>
+<div class="hero-buttons">
+    <a href="catalog.php" class="btn-outline">КАТАЛОГ ЗАПЧАСТЕЙ</a>
+    <a href="service.php" class="btn-outline">ЗАПИСАТЬСЯ НА СЕРВИС</a>
+    <a href="gallery.php" class="btn-outline">НАШИ РАБОТЫ</a>
+</div>
             </div>
         </div>
     </section>

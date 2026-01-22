@@ -1,7 +1,8 @@
 <?php
-// Отключаем вывод ошибок в браузер, чтобы не ломать JSON
+// send.php
 ini_set('display_errors', 0);
 error_reporting(0);
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(403);
@@ -11,62 +12,54 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $config = require 'config.php';
 
-// Получаем данные
-$name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
-$phone = isset($_POST['phone']) ? trim(strip_tags($_POST['phone'])) : '';
-$email = isset($_POST['email']) ? trim(strip_tags($_POST['email'])) : '';
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
 
-// Валидация
-if (empty($name) || strlen($name) < 2) {
+// 1. Валидация Имени
+if (empty($name) || mb_strlen($name) < 2 || !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/u', $name)) {
     echo json_encode(['status' => 'error', 'message' => 'Введите корректное имя']);
     exit;
 }
 
-// Очистка телефона для проверки
+// 2. Валидация Телефона (только длина цифр)
 $phoneDigits = preg_replace('/\D/', '', $phone);
-if (empty($phone) || strlen($phoneDigits) < 10) {
-    echo json_encode(['status' => 'error', 'message' => 'Некорректный телефон']);
+if (strlen($phoneDigits) !== 11) {
+    echo json_encode(['status' => 'error', 'message' => 'Некорректный номер телефона']);
     exit;
 }
 
-// Формируем текст (или подпись к файлу)
-$txt = "<b>🔔 НОВАЯ ЗАЯВКА</b>\n";
-$txt .= "👤 <b>Имя:</b> " . $name . "\n";
-$txt .= "📱 <b>Телефон:</b> " . $phone . "\n";
-if (!empty($email)) $txt .= "📧 <b>Email:</b> " . $email . "\n";
-if (!empty($message)) $txt .= "💬 <b>Сообщение:</b> " . $message . "\n";
+// 3. Валидация Email (если есть)
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['status' => 'error', 'message' => 'Некорректный Email']);
+    exit;
+}
+
+// Формируем сообщение
+$txt = "<b>🔔 НОВАЯ ЗАЯВКА (Сайт)</b>\n";
+$txt .= "👤 <b>Имя:</b> " . htmlspecialchars($name) . "\n";
+$txt .= "📱 <b>Телефон:</b> " . htmlspecialchars($phone) . "\n";
+if (!empty($email)) $txt .= "📧 <b>Email:</b> " . htmlspecialchars($email) . "\n";
+if (!empty($message)) $txt .= "💬 <b>Сообщение:</b> " . htmlspecialchars($message) . "\n";
 $txt .= "\n🚀 <i>" . date('d.m.Y H:i') . "</i>";
 
 $token = $config['tg_token'];
 $chat_id = $config['tg_chat_id'];
 
-// --- ЛОГИКА ОТПРАВКИ ФАЙЛА ---
-$file_attached = false;
+// Отправка
+$post_fields = [
+    'chat_id' => $chat_id,
+    'parse_mode' => 'HTML'
+];
+
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-    $file_tmp = $_FILES['file']['tmp_name'];
-    $file_name = $_FILES['file']['name'];
-    
-    // Telegram API URL для документов
     $url = "https://api.telegram.org/bot" . $token . "/sendDocument";
-    
-    // Используем CURLFile для отправки файла
-    $post_fields = [
-        'chat_id' => $chat_id,
-        'caption' => $txt,
-        'parse_mode' => 'HTML',
-        'document' => new CURLFile($file_tmp, $_FILES['file']['type'], $file_name)
-    ];
-    
-    $file_attached = true;
+    $post_fields['caption'] = $txt;
+    $post_fields['document'] = new CURLFile($_FILES['file']['tmp_name'], $_FILES['file']['type'], $_FILES['file']['name']);
 } else {
-    // Если файла нет, отправляем просто текст
     $url = "https://api.telegram.org/bot" . $token . "/sendMessage";
-    $post_fields = [
-        'chat_id' => $chat_id,
-        'text' => $txt,
-        'parse_mode' => 'HTML'
-    ];
+    $post_fields['text'] = $txt;
 }
 
 $ch = curl_init();
@@ -81,8 +74,8 @@ curl_close($ch);
 $json = json_decode($result, true);
 
 if ($json && $json['ok']) {
-    echo json_encode(['status' => 'success', 'message' => 'Заявка успешно отправлена!']);
+    echo json_encode(['status' => 'success', 'message' => 'Заявка отправлена!']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Ошибка отправки в Telegram']);
+    echo json_encode(['status' => 'error', 'message' => 'Ошибка Telegram API']);
 }
 ?>

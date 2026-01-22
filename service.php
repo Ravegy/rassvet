@@ -226,8 +226,7 @@
 
     </div>
 
-    <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
     <script src="https://unpkg.com/imask"></script>
-    <script src="js/app.js?v=5"></script> 
-</body>
+    </body>
 </html>
