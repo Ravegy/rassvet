@@ -106,6 +106,57 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) { console.error(error); showToast('Ошибка соединения с сервером', 'error'); } finally { btn.disabled = false; btn.textContent = originalText; }
         });
     });
+
+    const catalogContainer = document.querySelector('.catalog-page');
+    if (catalogContainer) {
+        const views = {
+            main: document.getElementById('view-main'),
+            harvesters: document.getElementById('view-harvesters'),
+            accessories: document.getElementById('view-accessories'),
+            equipment: document.getElementById('view-equipment'),
+            'komatsu-models': document.getElementById('view-komatsu-models')
+        };
+        const titles = {
+            main: 'КАТАЛОГ ЗАПЧАСТЕЙ',
+            harvesters: 'ЛЕСОЗАГОТОВИТЕЛЬНЫЕ МАШИНЫ',
+            accessories: 'АКСЕССУАРЫ',
+            equipment: 'ОБОРУДОВАНИЕ',
+            'komatsu-models': 'KOMATSU HARVESTERS'
+        };
+        const titleEl = document.getElementById('pageTitle');
+        catalogContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            if (btn.classList.contains('js-nav-btn')) {
+                const target = btn.dataset.target;
+                if (views[target]) switchView(target);
+            }
+            if (btn.classList.contains('back-btn')) {
+                const target = btn.dataset.back;
+                switchView(target);
+            }
+        });
+        function switchView(viewName) {
+            Object.values(views).forEach(el => {
+                if(el) {
+                    el.style.display = 'none';
+                    el.classList.remove('active-view');
+                }
+            });
+            const targetView = views[viewName];
+            if (targetView) {
+                targetView.style.display = 'grid';
+                requestAnimationFrame(() => {
+                    targetView.classList.add('active-view');
+                    targetView.style.opacity = '1';
+                    targetView.style.transform = 'translateY(0)';
+                });
+                if (titleEl && titles[viewName]) titleEl.textContent = titles[viewName];
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        switchView('main');
+    }
 });
 
 function showToast(message, type = 'success') {

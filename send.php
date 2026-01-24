@@ -1,81 +1,83 @@
 <?php
-// send.php
-ini_set('display_errors', 0);
-error_reporting(0);
+// send.php - Secure & Strict
 header('Content-Type: application/json');
 
+// Конфигурация
+$MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+$ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(403);
-    echo json_encode(['status' => 'error', 'message' => 'Forbidden']);
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method Not Allowed']);
     exit;
 }
 
-$config = require 'config.php';
+try {
+    $config = require 'config.php';
+    if (!isset($config['tg_token']) || !isset($config['tg_chat_id'])) {
+        throw new Exception('Config Error');
+    }
 
-$name = isset($_POST['name']) ? trim($_POST['name']) : '';
-$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
-$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-$message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
+    // Валидация данных
+    $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $phone = isset($_POST['phone']) ? preg_replace('/\D/', '', $_POST['phone']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
 
-// 1. Валидация Имени
-if (empty($name) || mb_strlen($name) < 2 || !preg_match('/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/u', $name)) {
-    echo json_encode(['status' => 'error', 'message' => 'Введите корректное имя']);
-    exit;
-}
+    if (mb_strlen($name) < 2) throw new Exception('Введите корректное имя');
+    if (strlen($phone) !== 11) throw new Exception('Некорректный номер телефона');
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception('Некорректный Email');
 
-// 2. Валидация Телефона (только длина цифр)
-$phoneDigits = preg_replace('/\D/', '', $phone);
-if (strlen($phoneDigits) !== 11) {
-    echo json_encode(['status' => 'error', 'message' => 'Некорректный номер телефона']);
-    exit;
-}
+    // Формирование сообщения
+    $txt = "<b>🔔 НОВАЯ ЗАЯВКА</b>\n";
+    $txt .= "👤 <b>Имя:</b> " . htmlspecialchars($name) . "\n";
+    $txt .= "📱 <b>Тел:</b> +" . htmlspecialchars($phone) . "\n";
+    if ($email) $txt .= "📧 <b>Email:</b> " . htmlspecialchars($email) . "\n";
+    if ($message) $txt .= "💬 <b>Сообщение:</b>\n" . htmlspecialchars($message) . "\n";
+    $txt .= "\n🚀 <i>" . date('d.m.Y H:i') . "</i>";
 
-// 3. Валидация Email (если есть)
-if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['status' => 'error', 'message' => 'Некорректный Email']);
-    exit;
-}
+    // Подготовка отправки
+    $post_fields = [
+        'chat_id' => $config['tg_chat_id'],
+        'parse_mode' => 'HTML'
+    ];
 
-// Формируем сообщение
-$txt = "<b>🔔 НОВАЯ ЗАЯВКА (Сайт)</b>\n";
-$txt .= "👤 <b>Имя:</b> " . htmlspecialchars($name) . "\n";
-$txt .= "📱 <b>Телефон:</b> " . htmlspecialchars($phone) . "\n";
-if (!empty($email)) $txt .= "📧 <b>Email:</b> " . htmlspecialchars($email) . "\n";
-if (!empty($message)) $txt .= "💬 <b>Сообщение:</b> " . htmlspecialchars($message) . "\n";
-$txt .= "\n🚀 <i>" . date('d.m.Y H:i') . "</i>";
+    $endpoint = 'sendMessage';
+    
+    // Обработка файла
+    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $file = $_FILES['file'];
+        
+        if ($file['size'] > $MAX_FILE_SIZE) throw new Exception('Файл слишком большой (макс 10Мб)');
+        if (!in_array($file['type'], $ALLOWED_TYPES)) throw new Exception('Недопустимый формат файла');
+        
+        $endpoint = 'sendDocument';
+        $post_fields['caption'] = $txt;
+        $post_fields['document'] = new CURLFile($file['tmp_name'], $file['type'], $file['name']);
+    } else {
+        $post_fields['text'] = $txt;
+    }
 
-$token = $config['tg_token'];
-$chat_id = $config['tg_chat_id'];
+    // cURL запрос
+    $ch = curl_init("https://api.telegram.org/bot{$config['tg_token']}/{$endpoint}");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type:multipart/form-data"]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Включаем проверку SSL!
+    
+    $result = curl_exec($ch);
+    $error = curl_error($ch);
+    curl_close($ch);
 
-// Отправка
-$post_fields = [
-    'chat_id' => $chat_id,
-    'parse_mode' => 'HTML'
-];
+    if ($error) throw new Exception("Ошибка соединения: $error");
+    
+    $json = json_decode($result, true);
+    if (!$json || !$json['ok']) throw new Exception("Telegram API Error");
 
-if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-    $url = "https://api.telegram.org/bot" . $token . "/sendDocument";
-    $post_fields['caption'] = $txt;
-    $post_fields['document'] = new CURLFile($_FILES['file']['tmp_name'], $_FILES['file']['type'], $_FILES['file']['name']);
-} else {
-    $url = "https://api.telegram.org/bot" . $token . "/sendMessage";
-    $post_fields['text'] = $txt;
-}
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type:multipart/form-data"]);
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-$result = curl_exec($ch);
-curl_close($ch);
-
-$json = json_decode($result, true);
-
-if ($json && $json['ok']) {
     echo json_encode(['status' => 'success', 'message' => 'Заявка отправлена!']);
-} else {
-    echo json_encode(['status' => 'error', 'message' => 'Ошибка Telegram API']);
+
+} catch (Exception $e) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
 ?>
