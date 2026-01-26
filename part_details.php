@@ -6,67 +6,43 @@ if (!$searchNumber) { header('Location: catalog.php'); exit; }
 // Подключаем реестр
 $models = require __DIR__ . '/data/models_registry.php';
 
-$foundPartInfo = null; // Здесь сохраним описание (оно одинаковое везде)
+$foundPartInfo = null; // Здесь сохраним описание
 $usedIn = []; // Список вхождений: [Model, Path, Link]
 
-// --- ЛОГИКА ПОИСКА ПО ВСЕМ ФАЙЛАМ ---
+// --- ЛОГИКА ПОИСКА ---
 foreach ($models as $model) {
     if (!file_exists($model['data_file'])) continue;
     
     $data = require $model['data_file'];
     $modelName = $data['info']['model'];
     
-    // Перебираем все узлы
     if (isset($data['parts'])) {
         foreach ($data['parts'] as $subgroupId => $partsList) {
             foreach ($partsList as $part) {
                 if ($part['number'] === $searchNumber) {
-                    // 1. Сохраняем инфо о запчасти (если еще нет)
                     if (!$foundPartInfo) {
                         $foundPartInfo = $part;
                     }
 
-                    // 2. Определяем путь (Группа -> Подгруппа)
-                    $groupName = "Неизвестная группа";
+                    // Попытка найти имя подгруппы
                     $subgroupName = "Неизвестный узел";
-                    $groupId = "";
-
-                    // Ищем название подгруппы по ID
-                    // Нам нужно пробежаться по конфигам вложенности (engine_subgroups, etc)
-                    // Но проще перебрать вообще все массивы в $data
                     foreach ($data as $key => $value) {
                         if (is_array($value) && $key !== 'parts' && $key !== 'groups' && $key !== 'info') {
                             foreach ($value as $item) {
                                 if ($item['id'] == $subgroupId) {
                                     $subgroupName = $item['name'];
-                                    // Теперь надо найти родителя (Группу)
-                                    // Это сложнее, так как связь Parent->Child в конфиге модели
-                                    // Для простоты найдем группу методом исключения или перебора parents
-                                    // (В этом коде упростим: найдем группу через перебор всех групп, если в них есть этот ключ)
                                 }
                             }
                         }
                     }
 
-                    // Попытка найти Группу (Parent)
-                    foreach ($data['groups'] as $g) {
-                        // Это упрощение. В идеале нужно парсить $folder_config из модели
-                        // Но здесь мы просто выведем имя подгруппы
-                        $groupId = $g['id']; // Это заглушка, точный поиск требует сложной рекурсии
-                    }
-                    
-                    // Формируем ссылку на схему
-                    // Нам нужно знать ID группы (родителя), чтобы открыть меню. 
-                    // Ссылка: model_901_4.php?group=PARENT_ID&sub=SUB_ID&id=SUB_ID
-                    // Поскольку мы не знаем точного родителя без $folder_config, 
-                    // мы отправим прямую ссылку на ID (наш JS в модели умеет открывать по ?id=...)
-                    
+                    // Формируем ссылку
                     $link = $model['url'] . "?id=" . $subgroupId;
 
                     $usedIn[] = [
                         'model' => $modelName,
                         'article' => $part['number'],
-                        'path' => $subgroupName, // Путь: Название узла
+                        'path' => $subgroupName,
                         'link' => $link
                     ];
                 }
@@ -86,8 +62,10 @@ if (!$foundPartInfo && empty($usedIn)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $foundPartInfo['name'] ?> (<?= $searchNumber ?>) | Поиск запчастей</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="css/style.css?v=<?= file_exists(__DIR__ . '/css/style.css') ? filemtime(__DIR__ . '/css/style.css') : time(); ?>">
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <body>
@@ -95,6 +73,13 @@ if (!$foundPartInfo && empty($usedIn)) {
 
     <main class="content-padding">
         <div class="container">
+            <div style="margin-bottom: 20px;">
+                <button onclick="history.back()" class="tech-back-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>Назад</span>
+                </button>
+            </div>
+
             <div class="section-header" style="margin-bottom: 40px;">
                 Информация о запчасти
             </div>
@@ -116,7 +101,7 @@ if (!$foundPartInfo && empty($usedIn)) {
                             <span class="pd-value"><?= $foundPartInfo['name'] ?></span>
                         </div>
                         <div class="pd-row">
-                            <span class="pd-label">Описание / Спецификация:</span>
+                            <span class="pd-label">Спецификация:</span>
                             <span class="pd-value"><?= $foundPartInfo['spec'] ?? '-' ?></span>
                         </div>
                         <div class="pd-row">
@@ -136,9 +121,9 @@ if (!$foundPartInfo && empty($usedIn)) {
                         <table class="usage-table">
                             <thead>
                                 <tr>
-                                    <th>Название техники</th>
+                                    <th>Модель</th>
                                     <th>Артикул</th>
-                                    <th>Узел (Путь)</th>
+                                    <th>Узел</th>
                                 </tr>
                             </thead>
                             <tbody>
