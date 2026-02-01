@@ -1,108 +1,111 @@
-<?php
-$css_ver = file_exists(__DIR__ . '/css/style.css') ? filemtime(__DIR__ . '/css/style.css') : time();
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты | РАССВЕТ-С</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=<?= $css_ver ?>">
-    <link rel="icon" href="favicon.png" type="image/png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты | РАССВЕТ-С</title>
+<link rel="stylesheet" href="common.css?v=<?= time() ?>">
+<link rel="stylesheet" href="pages/contacts/style.css?v=<?= time() ?>">
 </head>
 <body>
-
-    <?php include 'header.php'; ?>
-    <div id="toast-container"></div>
-
-    <main>
-        <section class="home-hero">
-            <div class="container hero-content">
-                <h1 class="home-title">Свяжитесь с нами</h1>
-            </div>
-        </section>
-
-        <section class="content-padding" style="padding-top: 40px;">
-            <div class="container">
-                <div class="contacts-wrapper" style="grid-template-columns: 1fr;"> 
-                    <div class="contact-card contact-page-grid">
-                        
-                        <div class="contact-left-col">
-                            <div class="info-list">
-                                <h2 style="margin-top:0; margin-bottom: 30px; font-size: 22px; color: #fff; font-weight: 800; text-transform: uppercase;">Контактная информация</h2>
-                                
-                                <div class="info-item">
-                                    <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
-                                    <div class="info-content"><h3>Телефон</h3><a href="tel:+79818881337">+7 (981) 888-13-37</a></div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
-                                    <div class="info-content"><h3>Email</h3><a href="mailto:info@rassvet-s.ru">info@rassvet-s.ru</a></div>
-                                </div>
-
-                                <div class="info-item">
-                                    <div class="info-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
-                                    <div class="info-content"><h3>Адрес склада</h3><p style="color: #fff; font-size: 18px; font-weight: 700;">г. Санкт-Петербург,<br>ул. Промышленная, д. 42</p></div>
-                                </div>
-
-                                <div style="margin-top: 30px;">
-                                    <h3 style="color: #fff; margin-bottom: 10px; font-size: 18px; font-weight: 800; text-transform: uppercase;">Реквизиты</h3>
-                                    <p style="font-size: 13px; line-height: 1.6; color: #ccc; margin: 0;">
-                                        <strong>ООО «РАССВЕТ-С»</strong><br>
-                                        ИНН: 7805626388 / КПП: 780501001<br>
-                                        ОГРН: 1137847277873<br>
-                                        Юр. адрес: 198095, г. СПб, ул. Промышленная, д. 42, лит. А, пом. 9-Н, оф. 407
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-right-col">
-                            <h2 style="margin-top:0; margin-bottom: 20px; font-size: 22px; color: #fff; font-weight: 800; text-transform: uppercase;">Напишите нам</h2>
-                            <form id="contactPageForm" class="order-form" enctype="multipart/form-data" style="margin-top: 0;">
-                                
-                                <div class="form-group">
-                                    <input type="text" id="contactName" name="name" class="form-input" placeholder="Ваше Имя" required>
-                                    <div class="error-message">Минимум 2 буквы</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="Номер телефона" required>
-                                    <div class="error-message">Введите полный номер</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="email" id="contactEmail" name="email" class="form-input" placeholder="Ваш Email (для ответа)">
-                                    <div class="error-message">Некорректный Email</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea id="contactMessage" name="message" class="form-input" placeholder="Ваше сообщение..." rows="6" style="resize: none;" required></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="file" id="contactFile" name="file" class="form-input">
-                                </div>
-
-                                <button type="submit" class="btn-cart-order">Отправить сообщение</button>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="map-container" style="margin-top: 40px;">
-                    <iframe src="https://yandex.ru/map-widget/v1/?ll=30.264178%2C59.894451&z=16&pt=30.264178,59.894451,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <?php include 'footer.php'; ?>
-    <script src="https://unpkg.com/imask"></script>
+<?php include 'includes/header.php'; ?>
+<main class="contacts-page">
+<div class="container">
+<div class="page-header">
+<h1 class="page-title">СВЯЗАТЬСЯ С НАМИ</h1>
+<div class="page-status"><span class="status-dot"></span> ВСЕГДА НА СВЯЗИ</div>
+</div>
+<div class="contacts-grid">
+<div class="contacts-info-col">
+<div class="tech-card contact-card highlight-card">
+<div class="card-icon-corner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+<h3 class="card-label">ЕДИНАЯ СПРАВОЧНАЯ</h3>
+<a href="tel:+78120000000" class="main-phone">+7 (812) 000-00-00</a>
+<p class="work-time">Пн-Пт: 09:00 — 18:00 (МСК)</p>
+<div class="socials-row">
+<a href="#" class="social-link w-app">WHATSAPP</a>
+<a href="#" class="social-link tg">TELEGRAM</a>
+</div>
+</div>
+<div class="tech-card departments-card">
+<h3 class="card-label">ПРЯМЫЕ КОНТАКТЫ ОТДЕЛОВ</h3>
+<div class="dept-item">
+<div class="dept-head"><span class="dept-name">ОТДЕЛ ПРОДАЖ</span><span class="dept-status">Sales</span></div>
+<a href="mailto:sales@rassvet-s.ru" class="dept-link">sales@rassvet-s.ru</a>
+</div>
+<div class="dept-item">
+<div class="dept-head"><span class="dept-name">СЕРВИСНАЯ СЛУЖБА</span><span class="dept-status">Service</span></div>
+<a href="mailto:service@rassvet-s.ru" class="dept-link">service@rassvet-s.ru</a>
+</div>
+<div class="dept-item">
+<div class="dept-head"><span class="dept-name">БУХГАЛТЕРИЯ</span><span class="dept-status">Docs</span></div>
+<a href="mailto:buh@rassvet-s.ru" class="dept-link">buh@rassvet-s.ru</a>
+</div>
+</div>
+<div class="tech-card req-mini-card">
+<h3 class="card-label">ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ</h3>
+<div class="req-row-mini">
+<span>ООО «РАССВЕТ-С»</span>
+<button class="icon-btn copy-text" data-copy="ООО «РАССВЕТ-С»" title="Скопировать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+</div>
+<div class="req-row-mini">
+<span>ИНН: 7805626388</span>
+<button class="icon-btn copy-text" data-copy="7805626388" title="Скопировать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+</div>
+<div class="req-row-mini">
+<span>КПП: 780501001</span>
+<button class="icon-btn copy-text" data-copy="780501001" title="Скопировать"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+</div>
+</div>
+</div>
+<div class="contacts-map-col">
+<div class="tech-card addresses-row">
+<div class="addr-col">
+<div class="addr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+<span class="addr-type">ОФИС (СПб)</span>
+<p>ул. Промышленная, д. 42<br><span class="addr-hint">БЦ "Технопарк", офис 305</span></p>
+</div>
+<div class="vertical-divider"></div>
+<div class="addr-col">
+<div class="addr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+<span class="addr-type">СКЛАД (СПб)</span>
+<p>ул. Лесопарковая, д. 5<br><span class="addr-hint">Заезд с грузового КПП</span></p>
+</div>
+</div>
+<div class="tech-card map-card">
+<div class="map-overlay">
+<div class="map-interface">
+<div class="map-grid"></div>
+<div class="map-marker pulse"></div>
+<div class="map-label">СКЛАД SPB-01</div>
+</div>
+<iframe src="https://yandex.ru/map-widget/v1/?ll=30.268715%2C59.886367&z=14" width="100%" height="100%" frameborder="0"></iframe>
+</div>
+</div>
+<div class="tech-card form-card">
+<h3 class="card-label">НАПИСАТЬ СООБЩЕНИЕ</h3>
+<form class="contact-form" id="contactForm" enctype="multipart/form-data">
+<div class="form-row">
+<input type="text" name="name" class="c-input" placeholder="Ваше имя" required>
+<input type="tel" name="phone" class="c-input" placeholder="Ваш телефон" required>
+</div>
+<div class="form-row"><input type="email" name="email" class="c-input" placeholder="Ваша почта (Email)"></div>
+<textarea name="message" class="c-input c-area" placeholder="Текст сообщения или список запчастей..." rows="3"></textarea>
+<div class="file-upload-wrapper">
+<input type="file" name="file" id="formFile" class="file-input-hidden">
+<label for="formFile" class="file-upload-label">
+<span class="file-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></span>
+<span class="file-text" id="fileName">Прикрепить файл (фото, PDF, DOCX)</span>
+</label>
+</div>
+<button type="submit" class="btn btn-full">ОТПРАВИТЬ ЗАПРОС<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<?php include 'includes/footer.php'; ?>
+<script src="pages/contacts/script.js?v=<?= time() ?>"></script>
 </body>
 </html>

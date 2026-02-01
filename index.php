@@ -1,155 +1,212 @@
-<?php 
-// Логика остается наверху
-$partners = include 'data/partners_data.php';
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Запчасти Komatsu Forest | РАССВЕТ-С</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/style.css?v=<?= file_exists(__DIR__ . '/css/style.css') ? filemtime(__DIR__ . '/css/style.css') : time(); ?>">
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="pages/home/style.css">
 </head>
 <body>
-    <?php include 'header.php'; ?>
 
-    <main>
-        <section class="home-hero">
-            <div class="container hero-content">
-                <div class="hero-text-block">
-                    <div class="hero-badge">Работаем с 2013 года</div>
-                    <h1 class="home-title">ЗАПЧАСТИ ДЛЯ <br><span style="color: var(--brand-green);">KOMATSU FOREST</span></h1>
-                    <p class="home-subtitle">Федеральный дистрибьютор запчастей. Собственный сервисный центр. Отгрузка день в день.</p>
-                    <div class="hero-buttons">
-                        <a href="catalog.php" class="btn-outline">КАТАЛОГ ЗАПЧАСТЕЙ</a>
-                        <a href="service.php" class="btn-outline">ЗАПИСАТЬСЯ НА СЕРВИС</a>
-                        <a href="gallery.php" class="btn-outline">НАШИ РАБОТЫ</a>
+<?php include 'includes/header.php'; ?>
+
+<main class="home-page">
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero__grid">
+                
+                <div class="hero__content">
+                    
+                    <div class="anim-hidden animate-left">
+                        <div class="status-bar">
+                            <div class="status-dot"></div>
+                            ОФИЦИАЛЬНЫЙ ПОСТАВЩИК С 2015 ГОДА
+                        </div>
+                        <h1 class="hero__title">ЗАПЧАСТИ ДЛЯ <br><span class="text-yellow">ЛЕСНОЙ ТЕХНИКИ</span></h1>
                     </div>
+                    
+                    <p class="hero__desc anim-hidden animate-left delay-200">
+                        Прямые поставки комплектующих для харвестеров и форвардеров Komatsu Forest, Ponsse, John Deere. Собственный склад в Санкт-Петербурге.
+                    </p>
+                    
+                    <div class="hero__buttons anim-hidden animate-up delay-300">
+                        <a href="catalog.php" class="btn btn-main">ПЕРЕЙТИ В КАТАЛОГ</a>
+                        <a href="service.php" class="btn btn-sec">СЕРВИС И РЕМОНТ</a>
+                    </div>
+                </div>
+                
+                <div class="hero__bento-wrapper anim-hidden animate-right delay-100">
+                    <div class="bento-container">
+                        
+                        <div class="bento-col">
+                        <div class="bento-item"><img src="https://i.pinimg.com/1200x/65/f2/52/65f252158bc27926c8673cc4129842d4.jpg" alt=""></div>
+                        <div class="bento-item"><img src="https://i.pinimg.com/1200x/02/c6/2e/02c62e10d3d24f2c13dce0a5728ffed3.jpg" alt=""></div>
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/wheeled-harvesters/komatsu-951xc/komatsu-951xc-2.jpg?thn=0&w=1200&hash=4BA388AE128D50C1E7B9EAF49E9AFF93E26D11C2" alt=""></div>
+                    </div>
+                    <div class="bento-col">
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/komatsu-grapples/komatsu-grapples-new-design.jpg?thn=0&w=1200&hash=C8D87E4925C06BDDD84B76EAE2CD4D5ED5BF9D95" alt=""></div>
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/wheeled-harvesters/komatsu-901xc-2020/ko901xc_2019_8828.jpg?thn=0&w=1200&hash=ADCF887C020FAC211AE9204B144C60EEEB0D3C35" alt=""></div>
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/forwarders/komatsu-895-2025/ko895_mg_5233.jpg?thn=0&w=1200&hash=F4C9478859B52B7DB7CD1AB4D37D3A468AE80C8A" alt=""></div>
+                    </div>
+                    <div class="bento-col">
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/harvester-heads/komatsu-c164/komatsu-c164-top.jpg?thn=0&w=1200&hash=E299EEC771C1C47674CD52CE38D7514E65C55835" alt=""></div>
+                        <div class="bento-item"><img src="https://i.pinimg.com/1200x/31/5e/d1/315ed1626d7b2d21243834adf5cc6425.jpg" alt=""></div>
+                        <div class="bento-item"><img src="https://www.komatsuforest.com.au/-/media/komatsu-forest/images/product-images/options-forwarders/comfort-ride-2021.jpg?thn=0&w=1200&hash=213C1F939B991268FAA4EF54BC95926E2703C07B" alt=""></div>
+                    </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features__grid">
+                <div class="tech-card feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">СКЛАД В СПБ</h3>
+                        <p class="feature-desc">Более 5000 позиций в наличии. Отгрузка в день оплаты.</p>
+                    </div>
+                </div>
+                <div class="tech-card feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">ОПЕРАТИВНОСТЬ</h3>
+                        <p class="feature-desc">Доставка до терминала ТК за наш счет. Авиадоставка за 24 часа.</p>
+                    </div>
+                </div>
+                <div class="tech-card feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                    </div>
+                    <div class="feature-text">
+                        <h3 class="feature-title">ГАРАНТИЯ</h3>
+                        <p class="feature-desc">Только проверенные бренды (OEM). Гарантия на все узлы от 6 месяцев.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker__item">KOMATSU FOREST</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">SKF</div>
+            <div class="ticker__item">DANFOSS</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">BOSCH REXROTH</div>
+            <div class="ticker__item">LOGSET</div>
+            <div class="ticker__item">KOMATSU FOREST</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">SKF</div>
+            <div class="ticker__item">DANFOSS</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">BOSCH REXROTH</div>
+            <div class="ticker__item">LOGSET</div>
+            <div class="ticker__item">KOMATSU FOREST</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">SKF</div>
+            <div class="ticker__item">DANFOSS</div>
+            <div class="ticker__item">PARKER</div>
+            <div class="ticker__item">BOSCH REXROTH</div>
+            <div class="ticker__item">LOGSET</div>
+        </div>
+    </div>
+
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title-center">ПОПУЛЯРНЫЕ КАТЕГОРИИ</h2>
+            <div class="categories__grid">
+                
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg></div>
+                    <h3 class="cat-title">ГИДРАВЛИКА</h3>
+                </a>
+
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+                    <h3 class="cat-title">ЭЛЕКТРОНИКА</h3>
+                </a>
+
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg></div>
+                    <h3 class="cat-title">ХОДОВАЯ ЧАСТЬ</h3>
+                </a>
+
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                    <h3 class="cat-title">ДВИГАТЕЛЬ</h3>
+                </a>
+
+                 <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></div>
+                    <h3 class="cat-title">ФИЛЬТРЫ</h3>
+                </a>
+                
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg></div>
+                    <h3 class="cat-title">ДАТЧИКИ</h3>
+                </a>
+
+                <a href="#" class="tech-card cat-card">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></div>
+                    <h3 class="cat-title">АГРЕГАТЫ</h3>
+                </a>
+
+                <a href="catalog.php" class="tech-card cat-card cat-card-all">
+                    <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                    <h3 class="cat-title">ВЕСЬ КАТАЛОГ</h3>
+                </a>
+            </div>
+        </section>
+
+        <section class="vin-request">
+            <div class="container">
+                <div class="tech-card vin-box">
+                    <div class="vin-content">
+                        <h2 class="vin-title">НЕ ЗНАЕТЕ АРТИКУЛ?</h2>
+                        <p class="vin-desc">
+                            Оставьте заявку на подбор запчасти. Мы проверим совместимость по VIN-коду вашей техники и предложим варианты (Оригинал / OEM).
+                        </p>
+                        <ul class="vin-list">
+                            <li>
+                                <div class="vin-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                <span>Проверка по официальным каталогам</span>
+                            </li>
+                            <li>
+                                <div class="vin-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg></div>
+                                <span>Ответ в течение 15 минут</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <form class="vin-form">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="form-input" placeholder="Ваш телефон" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="message" class="form-input" placeholder="VIN-код или Модель техники">
+                        </div>
+                        <button type="submit" class="btn btn-main form-btn">ПОДОБРАТЬ ЗАПЧАСТЬ</button>
+                    </form>
                 </div>
             </div>
         </section>
 
-        <div class="container" style="padding-bottom: 80px; position: relative; z-index: 2;">
-            
-            <div class="features-home">
-                <div class="feat-card reveal-block">
-                    <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
-                    <div><h3>Склад в СПб</h3><p>90% позиций в наличии. Быстрая логистика.</p></div>
-                </div>
-                <div class="feat-card reveal-block" style="transition-delay: 0.2s;">
-                    <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                    <div><h3>Отгрузка 24/7</h3><p>Отправляем груз в день обращения.</p></div>
-                </div>
-                <div class="feat-card reveal-block" style="transition-delay: 0.4s;">
-                    <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                    <div><h3>Гарантия</h3><p>Оригиналы и проверенный OEM.</p></div>
-                </div>
-            </div>
+</main>
 
-            <div class="contact-card map-block-wrapper reveal-block" style="margin-top: 40px;">
-                <div class="map-text-side">
-                    <h2 class="section-header" style="justify-content:center; margin-bottom: 20px;">География поставок</h2>
-                    <p style="color: #ccc; margin-bottom: 40px;">Центральный склад в Санкт-Петербурге — это наш логистический хаб. Мы отладили маршруты доставки от Карелии до Дальнего Востока.</p>
-                    <div class="map-stats-row">
-                        <div class="stat-item"><div class="stat-num">85</div><div class="stat-label">Регионов</div></div>
-                        <div class="stat-item"><div class="stat-num">1-3</div><div class="stat-label">Дня доставка</div></div>
-                        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Страховка</div></div>
-                    </div>
-                </div>
-                
-                <div class="map-visual-side">
-                    <div class="map-container-relative">
-                        <img src="img/map_full.png" class="map-bg-image" alt="Карта РФ" loading="lazy">
-                        <svg class="map-overlay-svg" viewBox="0 0 1000 535" preserveAspectRatio="xMidYMid meet">
-                            <g class="map-lines">
-                                <?php 
-                                $lines = [
-                                    [220,150], [180,200], [280,190], [160,250], [200,255], [240,265], 
-                                    [210,290], [80,330], [310,240], [340,270], [380,275], [420,225], 
-                                    [480,320], [540,310], [610,340], [750,220], [850,360], [840,400]
-                                ];
-                                foreach($lines as $i => $xy): 
-                                    $delay = 0.1 * (($i % 5) + 1);
-                                ?>
-                                <line x1="135" y1="210" x2="<?= $xy[0] ?>" y2="<?= $xy[1] ?>" class="map-line" style="animation-delay: <?= $delay ?>s" />
-                                <?php endforeach; ?>
-                            </g>
-                            
-                            <circle cx="135" cy="210" r="5" fill="#fff" />
-                            <circle cx="135" cy="210" r="25" fill="var(--brand-green)" opacity="0.3">
-                                <animate attributeName="r" from="5" to="35" dur="2s" repeatCount="indefinite" />
-                                <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
-                            </circle>
-                            <text x="135" y="190" class="map-label main-label" text-anchor="middle">Санкт-Петербург</text>
-
-                            <?php
-                            $cities = [
-                                ['x'=>220, 'y'=>150, 'n'=>'Архангельск'],
-                                ['x'=>180, 'y'=>200, 'n'=>'Вологда', 's'=>10],
-                                ['x'=>280, 'y'=>190, 'n'=>'Сыктывкар'],
-                                ['x'=>160, 'y'=>250, 'n'=>'Москва', 'a'=>'end', 'dy'=>15],
-                                ['x'=>200, 'y'=>255, 'n'=>'Н.Новгород', 'a'=>'middle', 's'=>10, 'dy'=>-15],
-                                ['x'=>240, 'y'=>265, 'n'=>'Казань', 's'=>10],
-                                ['x'=>210, 'y'=>290, 'n'=>'Самара', 's'=>10, 'dy'=>10],
-                                ['x'=>80,  'y'=>330, 'n'=>'Краснодар'],
-                                ['x'=>310, 'y'=>240, 'n'=>'Пермь', 'dy'=>-5],
-                                ['x'=>340, 'y'=>270, 'n'=>'Екатеринбург', 'a'=>'middle', 'dy'=>20],
-                                ['x'=>380, 'y'=>275, 'n'=>'Тюмень', 's'=>10],
-                                ['x'=>420, 'y'=>225, 'n'=>'Сургут'],
-                                ['x'=>480, 'y'=>320, 'n'=>'Новосибирск', 'a'=>'middle', 'dy'=>20],
-                                ['x'=>540, 'y'=>310, 'n'=>'Красноярск', 'a'=>'middle', 'dy'=>20],
-                                ['x'=>610, 'y'=>340, 'n'=>'Иркутск', 'dy'=>5],
-                                ['x'=>750, 'y'=>220, 'n'=>'Якутск'],
-                                ['x'=>850, 'y'=>360, 'n'=>'Хабаровск'],
-                                ['x'=>840, 'y'=>400, 'n'=>'Владивосток', 'a'=>'end', 'dy'=>15]
-                            ];
-                            foreach($cities as $c): 
-                                $anchor = $c['a'] ?? 'start';
-                                $size = $c['s'] ?? 11;
-                                $dy = $c['dy'] ?? 0;
-                                $y_text = ($dy != 0) ? $c['y'] + $dy : $c['y'];
-                                if ($dy == 0) $y_text = $c['y'] + ($anchor === 'middle' ? 20 : 0);
-                                if ($dy == 0 && $anchor !== 'middle') $y_text = $c['y'];
-                                $text_x = $c['x'] + ($anchor === 'start' ? 10 : ($anchor === 'end' ? -10 : 0));
-                                $text_y = $c['y'] + ($anchor === 'middle' ? 20 : 5);
-                                if(isset($c['dy'])) $text_y = $c['y'] + $c['dy'];
-                            ?>
-                            <circle cx="<?= $c['x'] ?>" cy="<?= $c['y'] ?>" r="<?= ($anchor === 'middle' || isset($c['dy'])) ? 4 : 3 ?>" class="dest-dot" />
-                            <text x="<?= $text_x ?>" y="<?= $text_y ?>" class="map-label" text-anchor="<?= $anchor ?>" style="font-size: <?= $size ?>px;"><?= $c['n'] ?></text>
-                            <?php endforeach; ?>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <div class="contact-card content-padding reveal-block" style="margin-top: 60px;">
-                <h2 class="section-header" style="justify-content: center; margin-bottom: 40px;">Наши партнеры</h2>
-                <div class="partners-wrap">
-                    <button class="p-btn p-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                    <div class="partners-track" id="partnersTrack">
-                        <?php foreach($partners as $p): ?>
-                        <div class="partner-item">
-                            <span style="font-weight: 900; font-size: 40px; color: <?= $p['color'] ?>; text-transform: uppercase;" class="partner-logo"><?= $p['name'] ?></span>
-                            <div class="partner-float-name"><?= $p['name'] ?></div>
-                        </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <button class="p-btn p-next" aria-label="Next"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <div id="toast-container"></div>
-    <?php include 'footer.php'; ?>
-    <script src="https://unpkg.com/imask"></script>
-    <script src="js/app.js"></script>
-</body>
+<?php include 'includes/footer.php'; ?>
 </html>
